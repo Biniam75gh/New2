@@ -7,135 +7,103 @@
     <style>
         body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding-bottom: 100px; }
         .header { background: #002d72; color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
-        .logo { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto 15px auto; object-fit: contain; }
-        .call-btn { background: #007bff; color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 16px; margin-left: 150px; }
+        .logo { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto 15px auto; }
         .page { display: none; padding: 20px; }
         .active-page { display: block; }
+        .section-box { background: white; padding: 20px; border-radius: 15px; margin-top: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
         .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; font-size: 16px; font-weight: bold; }
-        .section-box { background: white; padding: 20px; border-radius: 15px; margin-top: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .list-item { border-bottom: 1px solid #eee; padding: 15px 0; color: #333; font-weight: bold; font-size: 15px; }
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999; }
         .nav-item { text-align: center; font-size: 13px; font-weight: bold; cursor: pointer; color: #002d72; }
-        .nav-icon { font-size: 24px; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <img src="1000020924.png" class="logo" alt="BGE Logo">
-        <a href="tel:+251918427112" class="call-btn">CALL NOW</a>
+        <img src="1000020924.png" class="logo" alt="Logo">
     </div>
 
     <!-- Home Page -->
     <div id="home" class="page active-page">
         <div class="grid">
-            <div class="card" onclick="showDetail('tv')">📺<br>TV</div>
-            <div class="card" onclick="showDetail('fridge')">❄️<br>Fridge</div>
-            <div class="card" onclick="showDetail('laundry')">🧺<br>Laundry</div>
-            <div class="card" onclick="showDetail('solar')">☀️<br>Solar</div>
-            <div class="card" onclick="showDetail('mobile')">📱<br>Mobile</div>
-            <div class="card" onclick="showDetail('other')">📦<br>Other</div>
-        </div>
-        <div id="details" class="section-box" style="display:none;">
-            <h3 id="service-title" style="color:#002d72; font-size: 18px;"></h3>
-            <div id="list-content"></div>
+            <div class="card" onclick="showPage('products')">📦<br>Products</div>
         </div>
     </div>
 
     <!-- Products Page -->
     <div id="products" class="page">
-        <div class="section-box">
-            <h2 style="color:#25d366;">የሚሸጡ እቃዎች</h2>
-            <div id="product-list"></div>
-        </div>
-    </div>
-
-    <!-- Contact Page -->
-    <div id="contact" class="page">
-        <div class="section-box" style="text-align:center;">
-            <h2>ያግኙን</h2>
-            <a href="https://wa.me/251918427112" style="display:block; background:#25d366; color:white; padding:15px; border-radius:10px; margin:10px 0; text-decoration:none; font-size: 16px;">በዋትሳፕ ያግኙን</a>
-            <a href="tel:+251918427112" style="display:block; background:#002d72; color:white; padding:15px; border-radius:10px; text-decoration:none; font-size: 16px;">ስልክ: +251 91 842 7112</a>
-        </div>
+        <div id="product-list"></div>
     </div>
 
     <!-- Bottom Navigation -->
     <div class="bottom-nav">
-        <div class="nav-item" onclick="showPage('home')"><span class="nav-icon">🏠</span>Home</div>
-        <div class="nav-item" onclick="showPage('products')"><span class="nav-icon">📦</span>Products</div>
-        <div class="nav-item" onclick="Tawk_API.maximize()"><span class="nav-icon">💬</span>Chat</div>
-        <div class="nav-item" onclick="showPage('contact')"><span class="nav-icon">📞</span>Contact</div>
+        <div class="nav-item" onclick="showPage('home')">🏠<br>Home</div>
+        <div class="nav-item" onclick="showPage('products')">📦<br>Products</div>
     </div>
 
     <script>
-        const serviceData = {
-            tv: ["1. ድምፅ ኖሮ ምስል የሌለው", "2. ቀይ መስመር የሚያሳይ", "3. ምስል ኖሮ ድምፅ የሌለው", "4. ሶኬት ተሰክቶ ምንም አይነት ላይት የማያሳይ", "5. ስክሪኑ ላይ የተደራረበ መስመር(የስክሪን ብልሽት)"],
-            fridge: ["1. ቅዝቃዜ መቀነስ", "2. የውሃ መፍሰስ", "3. የበር መዘጋት ችግር"],
-            laundry: ["1. ውሃ መሙላት አለመቻል", "2. መሽከርከር አለመቻል"],
-            solar: ["1. የፓነል ጽዳት", "2. የባትሪ አቅም መመዘን"],
-            mobile: ["1. ስክሪን መቀየር", "2. ባትሪ መጥፋት"],
-            other: ["1. የኤሌክትሪክ መስመር ዝርጋታ", "2. የኤሌክትሪክ እቃዎች"]
-        };
-
         const productsData = [
-            { id: 1, name: "55 ኢንች TV", price: "45000", image: "1000020885.jpg" },
-            { id: 2, name: "65 ኢንች 4K Smart TV", price: "75000", image: "1000020886.jpg" },
-            { id: 3, name: "Samsung Galaxy S25 Ultra", price: "120000", image: "1000020888.jpg" },
-            { id: 4, name: "የቲቪ መደርደሪያ", price: "8500", image: "1000020887.jpg" },
-            { id: 5, name: "ኦማስካ ቦርሳ (OMASKA Backpack)", price: "2500", image: "1000020889.jpg" }
+            { id: 1, name: "Samsung Galaxy S25 Ultra", price: "120000", image: "1000020888.jpg" }
         ];
-
-        function showDetail(key) {
-            document.getElementById('details').style.display = 'block';
-            document.getElementById('service-title').innerText = key.toUpperCase() + " ጥገና";
-            document.getElementById('list-content').innerHTML = serviceData[key].map(item => `<div class="list-item">${item}</div>`).join('');
-        }
 
         function loadProducts() {
             const container = document.getElementById('product-list');
             container.innerHTML = productsData.map(p => `
-                <div class="section-box" style="border:1px solid #ddd; margin-bottom: 20px;">
-                    <img src="${p.image}" alt="${p.name}" style="width:100%; border-radius:10px; margin-bottom:10px;">
-                    <h4 style="font-size: 16px;">${p.name} - ${p.price} ETB</h4>
-                    <form action="https://formspree.io/f/xbdbbpkv" method="POST" enctype="multipart/form-data">
+                <div class="section-box" id="form-container-${p.id}">
+                    <img src="${p.image}" style="width:100%; border-radius:10px;">
+                    <h3>${p.name} - ${p.price} ETB</h3>
+                    
+                    <form action="https://formspree.io/f/xbdbbpkv" method="POST" enctype="multipart/form-data" onsubmit="return handleFormSubmit(event, ${p.id})">
                         <input type="hidden" name="Product" value="${p.name}">
-                        <input type="text" name="FullName" placeholder="ሙሉ ስም" required style="width:100%; padding:8px; margin-bottom:5px;"><br>
-                        <input type="text" name="City" placeholder="ከተማ እና አድራሻ" required style="width:100%; padding:8px; margin-bottom:5px;"><br>
-                        <input type="tel" name="Phone" placeholder="ስልክ ቁጥር" required style="width:100%; padding:8px; margin-bottom:5px;"><br>
-                        <label style="font-size: 12px;">የክፍያ ስክሪንሹት ይጫኑ:</label>
-                        <input type="file" name="Screenshot" accept="image/*" required style="width:100%; margin-bottom:10px;"><br>
-                        <button type="submit" style="width:100%; background:#002d72; color:white; padding:10px; border:none; border-radius:5px; font-weight:bold;">ግዢን ይላኩ</button>
+                        <input type="text" name="FullName" placeholder="ሙሉ ስም" required style="width:90%; padding:10px; margin-bottom:10px;"><br>
+                        <input type="text" name="City" placeholder="ከተማ እና አድራሻ" required style="width:90%; padding:10px; margin-bottom:10px;"><br>
+                        <input type="tel" name="Phone" placeholder="ስልክ ቁጥር" required style="width:90%; padding:10px; margin-bottom:10px;"><br>
+                        
+                        <div class="section-box" style="background:#f9f9f9; border:1px solid #ddd;">
+                            <h4>ደረጃ 2: ክፍያ ይፈጽሙ (Biniam Girma)</h4>
+                            <p><b>CBE:</b> 1000233582817<br>
+                               <b>BOA:</b> 37540676<br>
+                               <b>Telebirr:</b> 0918427112</p>
+                            <label>የክፍያ ስክሪንሹት ይጫኑ:</label><br>
+                            <input type="file" name="Screenshot" accept="image/*" required>
+                        </div>
+                        
+                        <button type="submit" style="width:100%; background:#002d72; color:white; padding:15px; border:none; border-radius:5px; margin-top:10px;">ግዢን ይላኩ</button>
                     </form>
                 </div>
             `).join('');
         }
 
+        async function handleFormSubmit(event, id) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                document.getElementById(`form-container-${id}`).innerHTML = `
+                    <div style="text-align:center; padding:40px;">
+                        <h1 style="color:#25d366;">✅</h1>
+                        <h2>ትዕዛዝዎ ደርሶናል!</h2>
+                        <p>ስለገዙን እናመሰግናለን። ክፍያዎን አረጋግጠን በአጭር ጊዜ ውስጥ እናሳውቆታለን።</p>
+                        <button onclick="location.reload()" style="padding:10px 20px;">ወደ መጀመሪያው ገጽ ይመለሱ</button>
+                    </div>`;
+            } else {
+                alert("ስህተት ተፈጥሯል፣ እባክዎ እንደገና ይሞክሩ።");
+            }
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.getElementById(pageId).classList.add('active-page');
-            document.getElementById('details').style.display = 'none';
         }
 
         loadProducts();
-    </script>
-
-    <script type="text/javascript">
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        Tawk_API.customStyle = {
-            visibility: {
-                desktop: { xOffset: '15px', yOffset: '90px', position: 'br' },
-                mobile: { xOffset: '10px', yOffset: '80px', position: 'br' }
-            }
-        };
-        (function(){
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/62798f1bb0d10b6f3e7160e7/1g2lde1gq';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
-        })();
     </script>
 </body>
 </html>
