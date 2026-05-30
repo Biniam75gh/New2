@@ -8,10 +8,10 @@
         body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding-bottom: 100px; }
         .header { background: #002d72; color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
         
-        /* የተስተካከለ የሎጎ ስታይል - ምስሉ ሙሉ ለሙሉ እንዲታይ */
+        /* የሎጎ ስታይል - ሙሉ ለሙሉ እንዲታይ */
         .logo { 
             width: 100%; 
-            max-width: 300px; /* ስፋቱን ጨምሬዋለሁ */
+            max-width: 300px; 
             height: auto; 
             display: block; 
             margin: 0 auto 15px auto; 
@@ -82,9 +82,9 @@
             tv: ["1. ድምፅ ኖሮ ምስል የሌለው", "2. ቀይ መስመር የሚያሳይ", "3. ምስል ኖሮ ድምፅ የሌለው", "4. ሶኬት ተሰክቶ ምንም አይነት ላይት የማያሳይ", "5. ስክሪኑ ላይ የተደራረበ መስመር(የስክሪን ብልሽት)"],
             fridge: ["1. ቅዝቃዜ መቀነስ", "2. የውሃ መፍሰስ", "3. የበር መዘጋት ችግር"],
             laundry: ["1. ውሃ መሙላት አለመቻል", "2. መሽከርከር አለመቻል"],
-            solar: ["1. የፓነል ጽዳት", "2. የባትሪ አቅም መመዘን"],
+            solar: ["1. የፓነል ጽዳት", "2. የባትሪ አቅም ማነስ"],
             mobile: ["1. ስክሪን መቀየር", "2. ባትሪ መጥፋት"],
-            other: ["1. ማይክሮዌቭ ጥገና", "2. የኤሌክትሪክ እቃዎች"]
+            other: ["1. የኤሌክትሪክ መስመር ዝርጋታና ጥገና", "2. ማነኛውም የኤሌክትሮኒክስ ጥገና"]
         };
 
         const productsData = [
@@ -125,14 +125,23 @@
     </script>
 
     <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        
+        // የቻት ቦክስ አቀማመጥ ማስተካከያ (ከፍ እንዲል)
+        Tawk_API.customStyle = {
+            visibility: {
+                desktop: { xOffset: '15px', yOffset: '90px', position: 'br' },
+                mobile: { xOffset: '10px', yOffset: '80px', position: 'br' }
+            }
+        };
+
         (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/62798f1bb0d10b6f3e7160e7/1g2lde1gq';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/62798f1bb0d10b6f3e7160e7/1g2lde1gq';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
         })();
     </script>
 </body>
