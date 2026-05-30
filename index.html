@@ -8,17 +8,20 @@
         body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding-bottom: 100px; }
         .header { background: #002d72; color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
         
-        /* የሎጎ ስታይል - ሙሉ ለሙሉ እንዲታይ */
-        .logo { 
-            width: 100%; 
-            max-width: 300px; 
-            height: auto; 
-            display: block; 
-            margin: 0 auto 15px auto; 
-            object-fit: contain; 
-        }
+        .logo { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto 15px auto; object-fit: contain; }
         
-        .call-btn { background: #007bff; color: white; padding: 10px 25px; border-radius: 25px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
+        /* CALL NOW ቁልፍ ማስተካከያ: አነስ ያለ እና ወደ ጎን የተጠጋ */
+        .call-btn { 
+            background: #007bff; 
+            color: white; 
+            padding: 6px 15px; /* መጠን እንዲያንስ ተደርጓል */
+            border-radius: 20px; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-weight: bold; 
+            font-size: 14px; /* የጽሁፍ መጠን ተቀንሷል */
+            margin-left: 150px; /* ወደ ጎን እንዲጠጋ ተደረገ */
+        }
         
         .page { display: none; padding: 20px; }
         .active-page { display: block; }
@@ -40,6 +43,7 @@
         <a href="tel:+251918427112" class="call-btn">CALL NOW</a>
     </div>
 
+    <!-- የተቀሩት ክፍሎች እንደነበሩ ናቸው -->
     <div id="home" class="page active-page">
         <div class="grid">
             <div class="card" onclick="showDetail('tv')">📺<br>TV</div>
@@ -84,7 +88,7 @@
             laundry: ["1. ውሃ መሙላት አለመቻል", "2. መሽከርከር አለመቻል"],
             solar: ["1. የፓነል ጽዳት", "2. የባትሪ አቅም መመዘን"],
             mobile: ["1. ስክሪን መቀየር", "2. ባትሪ መጥፋት"],
-            other: ["1. የኤሌክትሪክ መስመር ዝርጋታና ጥገና", "2. የኤሌክትሪክ እቃዎች"]
+            other: ["1. የኤሌክትሪክ መስመር ዝርጋታ", "2. ጄኔሬተር/ሞተር"]
         };
 
         const productsData = [
@@ -126,15 +130,12 @@
 
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        
-        // የቻት ቦክስ አቀማመጥ ማስተካከያ (ከፍ እንዲል)
         Tawk_API.customStyle = {
             visibility: {
                 desktop: { xOffset: '15px', yOffset: '90px', position: 'br' },
                 mobile: { xOffset: '10px', yOffset: '80px', position: 'br' }
             }
         };
-
         (function(){
             var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
             s1.async = true;
