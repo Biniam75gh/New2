@@ -8,111 +8,69 @@
         body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding-bottom: 100px; }
         .header { background: #002d72; color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
         .logo { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto 15px auto; }
+        .call-btn { background: #0084ff; color: white; padding: 10px 40px; border-radius: 20px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
         .page { display: none; padding: 20px; }
         .active-page { display: block; }
         .section-box { background: white; padding: 20px; border-radius: 15px; margin-top: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; font-size: 16px; font-weight: bold; }
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999; }
-        .nav-item { text-align: center; font-size: 13px; font-weight: bold; cursor: pointer; color: #002d72; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; font-size: 14px; font-weight: bold; }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999; }
+        .nav-item { text-align: center; font-size: 12px; font-weight: bold; cursor: pointer; color: #333; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="1000020924.png" class="logo" alt="Logo">
+        <a href="tel:0918427112" class="call-btn">CALL NOW</a>
     </div>
 
-    <!-- Home Page - እዚህ ጋር ነው ያሉት አይከኖች በሙሉ -->
     <div id="home" class="page active-page">
         <div class="grid">
-            <div class="card" onclick="showDetail('TV')">📺<br>TV</div>
-            <div class="card" onclick="showDetail('Fridge')">❄️<br>Fridge</div>
-            <div class="card" onclick="showDetail('Laundry')">🧺<br>Laundry</div>
-            <div class="card" onclick="showDetail('Solar')">☀️<br>Solar</div>
-            <div class="card" onclick="showDetail('Electrical')">⚡<br>Electric</div>
+            <div class="card" onclick="showRepairPage('TV')">📺<br>TV</div>
+            <div class="card" onclick="showRepairPage('Fridge')">❄️<br>Fridge</div>
+            <div class="card" onclick="showRepairPage('Laundry')">🧺<br>Laundry</div>
+            <div class="card" onclick="showRepairPage('Solar')">☀️<br>Solar</div>
+            <div class="card" onclick="showRepairPage('Electric')">⚡<br>Electric</div>
             <div class="card" onclick="showPage('products')">📦<br>Products</div>
         </div>
     </div>
 
-    <!-- Products Page -->
     <div id="products" class="page">
-        <div id="product-list"></div>
+        <div class="section-box">እቃዎች...</div>
     </div>
 
-    <!-- Bottom Navigation -->
+    <div id="repair-page" class="page">
+        <div class="section-box" id="repair-content"></div>
+    </div>
+
     <div class="bottom-nav">
         <div class="nav-item" onclick="showPage('home')">🏠<br>Home</div>
         <div class="nav-item" onclick="showPage('products')">📦<br>Products</div>
+        <div class="nav-item" onclick="alert('Bookings')">📅<br>Bookings</div>
+        <div class="nav-item" onclick="alert('Contact')">📞<br>Contact</div>
     </div>
 
     <script>
-        const productsData = [
-            { id: 1, name: "Samsung Galaxy S25 Ultra", price: "120000", image: "1000020888.jpg" }
-        ];
-
-        function loadProducts() {
-            const container = document.getElementById('product-list');
-            container.innerHTML = productsData.map(p => `
-                <div class="section-box" id="form-container-${p.id}">
-                    <img src="${p.image}" style="width:100%; border-radius:10px;">
-                    <h3>${p.name} - ${p.price} ETB</h3>
-                    
-                    <form action="https://formspree.io/f/xbdbbpkv" method="POST" enctype="multipart/form-data" onsubmit="return handleFormSubmit(event, ${p.id})">
-                        <input type="hidden" name="Product" value="${p.name}">
-                        <input type="text" name="FullName" placeholder="ሙሉ ስም" required style="width:90%; padding:10px; margin-bottom:10px;"><br>
-                        <input type="text" name="City" placeholder="ከተማ እና አድራሻ" required style="width:90%; padding:10px; margin-bottom:10px;"><br>
-                        <input type="tel" name="Phone" placeholder="ስልክ ቁጥር" required style="width:90%; padding:10px; margin-bottom:10px;"><br>
-                        
-                        <div class="section-box" style="background:#f9f9f9; border:1px solid #ddd;">
-                            <h4>ደረጃ 2: ክፍያ ይፈጽሙ (Biniam Girma)</h4>
-                            <p><b>CBE:</b> 1000233582817<br>
-                               <b>BOA:</b> 37540676<br>
-                               <b>Telebirr:</b> 0918427112</p>
-                            <label>የክፍያ ስክሪንሹት ይጫኑ:</label><br>
-                            <input type="file" name="Screenshot" accept="image/*" required>
-                        </div>
-                        
-                        <button type="submit" style="width:100%; background:#002d72; color:white; padding:15px; border:none; border-radius:5px; margin-top:10px;">ግዢን ይላኩ</button>
-                    </form>
-                </div>
-            `).join('');
-        }
-
-        function showDetail(item) {
-            alert(item + " አገልግሎት በቅርቡ ይጨመራል!");
-        }
-
-        async function handleFormSubmit(event, id) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                document.getElementById(`form-container-${id}`).innerHTML = `
-                    <div style="text-align:center; padding:40px;">
-                        <h1 style="color:#25d366;">✅</h1>
-                        <h2>ትዕዛዝዎ ደርሶናል!</h2>
-                        <p>ስለገዙን እናመሰግናለን። ክፍያዎን አረጋግጠን በአጭር ጊዜ ውስጥ እናገኝዎታለን።</p>
-                        <button onclick="location.reload()" style="padding:10px 20px;">ወደ መጀመሪያው ገጽ ይመለሱ</button>
-                    </div>`;
-            } else {
-                alert("ስህተት ተፈጥሯል፣ እባክዎ እንደገና ይሞክሩ።");
-            }
-        }
-
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.getElementById(pageId).classList.add('active-page');
         }
 
-        loadProducts();
+        function showRepairPage(serviceName) {
+            document.getElementById('repair-content').innerHTML = `
+                <h2>የ${serviceName} ጥገና አገልግሎት</h2>
+                <p>ችግሩን ይምረጡ:-</p>
+                <div class="section-box">1. ድምፅ ኖሮ ምስል የሌለው</div>
+                <div class="section-box">2. ቀይ መብራት እያበራ የማይሰራ</div>
+                <div class="section-box">3. ምስል ኖሮ ድምፅ የሌለው</div>
+                <div class="section-box">4. ስክሪን ተሰንጥቆ ምንም አይነት ላይታይ ከሆነ</div>
+                <div class="section-box">5. ስክሪን የተደረገ መስመር (ስክሪን ብልሽት)</div>
+                <br>
+                <button onclick="showPage('home')">← ወደ ዋናው ገጽ ይመለሱ</button>
+            `;
+            showPage('repair-page');
+        }
     </script>
 </body>
 </html>
