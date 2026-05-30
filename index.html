@@ -26,6 +26,7 @@
     <!-- Home Page -->
     <div id="home" class="page active-page">
         <div class="grid">
+            <div class="card" onclick="showDetail('tv')">📺<br>TV</div>
             <div class="card" onclick="showPage('products')">📦<br>Products</div>
         </div>
     </div>
@@ -74,6 +75,10 @@
             `).join('');
         }
 
+        function showDetail(type) {
+            alert("የ" + type + " ጥገና አገልግሎት በቅርቡ ይጨመራል!");
+        }
+
         async function handleFormSubmit(event, id) {
             event.preventDefault();
             const form = event.target;
@@ -90,7 +95,7 @@
                     <div style="text-align:center; padding:40px;">
                         <h1 style="color:#25d366;">✅</h1>
                         <h2>ትዕዛዝዎ ደርሶናል!</h2>
-                        <p>ስለገዙን እናመሰግናለን። ክፍያዎን አረጋግጠን በአጭር ጊዜ ውስጥ እናሳውቆታለን።</p>
+                        <p>ስለገዙን እናመሰግናለን። ክፍያዎን አረጋግጠን በአጭር ጊዜ ውስጥ እናገኝዎታለን።</p>
                         <button onclick="location.reload()" style="padding:10px 20px;">ወደ መጀመሪያው ገጽ ይመለሱ</button>
                     </div>`;
             } else {
