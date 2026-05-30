@@ -23,10 +23,14 @@
         <img src="1000020924.png" class="logo" alt="Logo">
     </div>
 
-    <!-- Home Page -->
+    <!-- Home Page - እዚህ ጋር ነው ያሉት አይከኖች በሙሉ -->
     <div id="home" class="page active-page">
         <div class="grid">
-            <div class="card" onclick="showDetail('tv')">📺<br>TV</div>
+            <div class="card" onclick="showDetail('TV')">📺<br>TV</div>
+            <div class="card" onclick="showDetail('Fridge')">❄️<br>Fridge</div>
+            <div class="card" onclick="showDetail('Laundry')">🧺<br>Laundry</div>
+            <div class="card" onclick="showDetail('Solar')">☀️<br>Solar</div>
+            <div class="card" onclick="showDetail('Electrical')">⚡<br>Electric</div>
             <div class="card" onclick="showPage('products')">📦<br>Products</div>
         </div>
     </div>
@@ -75,8 +79,8 @@
             `).join('');
         }
 
-        function showDetail(type) {
-            alert("የ" + type + " ጥገና አገልግሎት በቅርቡ ይጨመራል!");
+        function showDetail(item) {
+            alert(item + " አገልግሎት በቅርቡ ይጨመራል!");
         }
 
         async function handleFormSubmit(event, id) {
