@@ -10,30 +10,32 @@
         
         .logo { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto 15px auto; object-fit: contain; }
         
-        /* CALL NOW ቁልፍ ማስተካከያ: አነስ ያለ እና ወደ ጎን የተጠጋ */
+        /* CALL NOW ቁልፍ መጠን ተጨምሯል */
         .call-btn { 
             background: #007bff; 
             color: white; 
-            padding: 6px 15px; /* መጠን እንዲያንስ ተደርጓል */
+            padding: 8px 20px; 
             border-radius: 20px; 
             text-decoration: none; 
             display: inline-block; 
             font-weight: bold; 
-            font-size: 14px; /* የጽሁፍ መጠን ተቀንሷል */
-            margin-left: 150px; /* ወደ ጎን እንዲጠጋ ተደረገ */
+            font-size: 16px; /* የጽሁፍ መጠን ጨምሯል */
+            margin-left: 150px; 
         }
         
         .page { display: none; padding: 20px; }
         .active-page { display: block; }
         
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; font-size: 14px; font-weight: bold; }
+        .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; font-size: 16px; font-weight: bold; }
         
         .section-box { background: white; padding: 20px; border-radius: 15px; margin-top: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .list-item { border-bottom: 1px solid #eee; padding: 12px 0; color: #333; font-weight: bold; }
+        .list-item { border-bottom: 1px solid #eee; padding: 15px 0; color: #333; font-weight: bold; font-size: 15px; }
         
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); z-index: 9999; }
-        .nav-item { text-align: center; font-size: 12px; font-weight: bold; cursor: pointer; color: #002d72; }
+        /* የታችኛው ሜኑ ጽሁፍ መጠን ጨምሯል */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999; }
+        .nav-item { text-align: center; font-size: 13px; font-weight: bold; cursor: pointer; color: #002d72; }
+        .nav-icon { font-size: 24px; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
@@ -43,7 +45,7 @@
         <a href="tel:+251918427112" class="call-btn">CALL NOW</a>
     </div>
 
-    <!-- የተቀሩት ክፍሎች እንደነበሩ ናቸው -->
+    <!-- Home Page -->
     <div id="home" class="page active-page">
         <div class="grid">
             <div class="card" onclick="showDetail('tv')">📺<br>TV</div>
@@ -54,7 +56,7 @@
             <div class="card" onclick="showDetail('other')">📦<br>Other</div>
         </div>
         <div id="details" class="section-box" style="display:none;">
-            <h3 id="service-title" style="color:#002d72;"></h3>
+            <h3 id="service-title" style="color:#002d72; font-size: 18px;"></h3>
             <div id="list-content"></div>
         </div>
     </div>
@@ -69,16 +71,17 @@
     <div id="contact" class="page">
         <div class="section-box" style="text-align:center;">
             <h2>ያግኙን</h2>
-            <a href="https://wa.me/251918427112" style="display:block; background:#25d366; color:white; padding:15px; border-radius:10px; margin:10px 0; text-decoration:none;">በዋትሳፕ ያግኙን</a>
-            <a href="tel:+251918427112" style="display:block; background:#002d72; color:white; padding:15px; border-radius:10px; text-decoration:none;">ስልክ: +251 91 842 7112</a>
+            <a href="https://wa.me/251918427112" style="display:block; background:#25d366; color:white; padding:15px; border-radius:10px; margin:10px 0; text-decoration:none; font-size: 16px;">በዋትሳፕ ያግኙን</a>
+            <a href="tel:+251918427112" style="display:block; background:#002d72; color:white; padding:15px; border-radius:10px; text-decoration:none; font-size: 16px;">ስልክ: +251 91 842 7112</a>
         </div>
     </div>
 
+    <!-- የታችኛው ሜኑ -->
     <div class="bottom-nav">
-        <div class="nav-item" onclick="showPage('home')">🏠<br>Home</div>
-        <div class="nav-item" onclick="showPage('products')">📦<br>Products</div>
-        <div class="nav-item" onclick="alert('Bookings ገጽ በቅርቡ ይመጣል')">📅<br>Bookings</div>
-        <div class="nav-item" onclick="showPage('contact')">📞<br>Contact</div>
+        <div class="nav-item" onclick="showPage('home')"><span class="nav-icon">🏠</span>Home</div>
+        <div class="nav-item" onclick="showPage('products')"><span class="nav-icon">📦</span>Products</div>
+        <div class="nav-item" onclick="Tawk_API.maximize()"><span class="nav-icon">💬</span>Chat</div>
+        <div class="nav-item" onclick="showPage('contact')"><span class="nav-icon">📞</span>Contact</div>
     </div>
 
     <script>
@@ -86,9 +89,9 @@
             tv: ["1. ድምፅ ኖሮ ምስል የሌለው", "2. ቀይ መስመር የሚያሳይ", "3. ምስል ኖሮ ድምፅ የሌለው", "4. ሶኬት ተሰክቶ ምንም አይነት ላይት የማያሳይ", "5. ስክሪኑ ላይ የተደራረበ መስመር(የስክሪን ብልሽት)"],
             fridge: ["1. ቅዝቃዜ መቀነስ", "2. የውሃ መፍሰስ", "3. የበር መዘጋት ችግር"],
             laundry: ["1. ውሃ መሙላት አለመቻል", "2. መሽከርከር አለመቻል"],
-            solar: ["1. የፓነል ጽዳት", "2. የባትሪ አቅም መመዘን"],
+            solar: ["1. የፓነል ጽዳት", "2. የባትሪ አቅም ማነስ"],
             mobile: ["1. ስክሪን መቀየር", "2. ባትሪ መጥፋት"],
-            other: ["1. የኤሌክትሪክ መስመር ዝርጋታ", "2. ጄኔሬተር/ሞተር"]
+            other: ["1. የኤሌክትሪክ መስመር ዝርጋታ", "2. የኤሌክትሪክ እቃዎች"]
         };
 
         const productsData = [
@@ -110,10 +113,10 @@
             container.innerHTML = productsData.map(p => `
                 <div class="section-box" style="border:1px solid #ddd;">
                     <img src="${p.image}" alt="${p.name}" style="width:100%; border-radius:10px; margin-bottom:10px;">
-                    <h4>${p.name} - ${p.price} ETB</h4>
+                    <h4 style="font-size: 16px;">${p.name} - ${p.price} ETB</h4>
                     <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                        <a href="https://wa.me/251918427112?text=ስለ ${p.name} መረጃ እፈልጋለሁ" style="background:#25d366; padding:8px; border-radius:5px; color:white; text-decoration:none; font-size:12px;">ዋትሳፕ</a>
-                        <a href="tel:*127*1*251918427112*${p.price}#" style="background:#0055a4; padding:8px; border-radius:5px; color:white; text-decoration:none; font-size:12px;">በቴሌብር ክፍያ ይፈፅሙ</a>
+                        <a href="https://wa.me/251918427112?text=ስለ ${p.name} መረጃ እፈልጋለሁ" style="background:#25d366; padding:10px; border-radius:5px; color:white; text-decoration:none; font-size:14px;">ዋትሳፕ</a>
+                        <a href="tel:*127*1*251918427112*${p.price}#" style="background:#0055a4; padding:10px; border-radius:5px; color:white; text-decoration:none; font-size:14px;">በቴሌብር ክፍያ ይፈፅሙ</a>
                     </div>
                 </div>
             `).join('');
