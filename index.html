@@ -6,18 +6,28 @@
     <title>BGE Smart Repair</title>
     <style>
         body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding-bottom: 100px; }
-        .header { background: #002d72; color: white; padding: 20px; text-align: left; border-radius: 0 0 25px 25px; }
-        .logo { width: 140px; display: block; margin: 0 auto 10px auto; }
-        .call-btn { background: #007bff; color: white; padding: 8px 20px; border-radius: 20px; text-decoration: none; display: inline-block; margin-left: 20px; font-weight: bold; font-size: 14px; }
+        .header { background: #002d72; color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
+        
+        /* የተስተካከለ የሎጎ ስታይል - ምስሉ ሙሉ ለሙሉ እንዲታይ */
+        .logo { 
+            width: 100%; 
+            max-width: 300px; /* ስፋቱን ጨምሬዋለሁ */
+            height: auto; 
+            display: block; 
+            margin: 0 auto 15px auto; 
+            object-fit: contain; 
+        }
+        
+        .call-btn { background: #007bff; color: white; padding: 10px 25px; border-radius: 25px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
         
         .page { display: none; padding: 20px; }
         .active-page { display: block; }
         
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; font-size: 13px; font-weight: bold; }
+        .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; font-size: 14px; font-weight: bold; }
         
         .section-box { background: white; padding: 20px; border-radius: 15px; margin-top: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .list-item { border-bottom: 1px solid #eee; padding: 10px 0; color: #333; font-weight: bold; }
+        .list-item { border-bottom: 1px solid #eee; padding: 12px 0; color: #333; font-weight: bold; }
         
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 15px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.2); z-index: 9999; }
         .nav-item { text-align: center; font-size: 12px; font-weight: bold; cursor: pointer; color: #002d72; }
@@ -26,7 +36,7 @@
 <body>
 
     <div class="header">
-        <img src="1000020924.png" class="logo" alt="Logo">
+        <img src="1000020924.png" class="logo" alt="BGE Logo">
         <a href="tel:+251918427112" class="call-btn">CALL NOW</a>
     </div>
 
@@ -74,15 +84,15 @@
             laundry: ["1. ውሃ መሙላት አለመቻል", "2. መሽከርከር አለመቻል"],
             solar: ["1. የፓነል ጽዳት", "2. የባትሪ አቅም መመዘን"],
             mobile: ["1. ስክሪን መቀየር", "2. ባትሪ መጥፋት"],
-            other: ["1. የኤሌክትሪክ መስመር ዝርጋታና ጥገና", "2. ኦቭን እና ተዛማጅ የሆኑትን"]
+            other: ["1. ማይክሮዌቭ ጥገና", "2. የኤሌክትሪክ እቃዎች"]
         };
 
         const productsData = [
-            { id: 1, name: "55 ኢንች TV", price: "45000" },
-            { id: 2, name: "65 ኢንች 4K Smart TV", price: "75000" },
-            { id: 3, name: "Samsung Galaxy S25 Ultra", price: "120000" },
-            { id: 4, name: "የቲቪ መደርደሪያ", price: "8500" },
-            { id: 5, name: "ኦማስካ ቦርሳ (OMASKA Backpack)", price: "2500" }
+            { id: 1, name: "55 ኢንች TV", price: "45000", image: "1000020885.jpg" },
+            { id: 2, name: "65 ኢንች 4K Smart TV", price: "75000", image: "1000020886.jpg" },
+            { id: 3, name: "Samsung Galaxy S25 Ultra", price: "120000", image: "1000020888.jpg" },
+            { id: 4, name: "የቲቪ መደርደሪያ", price: "8500", image: "1000020887.jpg" },
+            { id: 5, name: "ኦማስካ ቦርሳ (OMASKA Backpack)", price: "2500", image: "1000020889.jpg" }
         ];
 
         function showDetail(key) {
@@ -95,24 +105,14 @@
             const container = document.getElementById('product-list');
             container.innerHTML = productsData.map(p => `
                 <div class="section-box" style="border:1px solid #ddd;">
+                    <img src="${p.image}" alt="${p.name}" style="width:100%; border-radius:10px; margin-bottom:10px;">
                     <h4>${p.name} - ${p.price} ETB</h4>
                     <div style="display:flex; gap:10px; flex-wrap:wrap;">
                         <a href="https://wa.me/251918427112?text=ስለ ${p.name} መረጃ እፈልጋለሁ" style="background:#25d366; padding:8px; border-radius:5px; color:white; text-decoration:none; font-size:12px;">ዋትሳፕ</a>
                         <a href="tel:*127*1*251918427112*${p.price}#" style="background:#0055a4; padding:8px; border-radius:5px; color:white; text-decoration:none; font-size:12px;">በቴሌብር ክፍያ ይፈፅሙ</a>
                     </div>
-                    <textarea id="comment-${p.id}" placeholder="አስተያየት ይስጡ..." style="width:100%; margin-top:10px; box-sizing:border-box;"></textarea>
-                    <button onclick="sendComment(${p.id}, '${p.name}')" style="margin-top:5px; padding:5px 10px; cursor:pointer;">አስተያየቱን ላክ</button>
                 </div>
             `).join('');
-        }
-
-        function sendComment(id, name) {
-            const comment = document.getElementById(`comment-${id}`).value;
-            if(comment.trim() !== "") {
-                window.open(`https://wa.me/251918427112?text=ስለ ${name} የተሰጠ አስተያየት፦ ${comment}`, '_blank');
-            } else {
-                alert("እባክዎ አስተያየት ይጻፉ");
-            }
         }
 
         function showPage(pageId) {
@@ -122,6 +122,18 @@
         }
 
         loadProducts();
+    </script>
+
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/62798f1bb0d10b6f3e7160e7/1g2lde1gq';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
     </script>
 </body>
 </html>
